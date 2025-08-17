@@ -248,11 +248,9 @@ if __name__ == "__main__":
 
     print("✅ Bot đang chạy...")
 
-    async def main():
+  async def main():
     # Tạo task vòng lặp API
     asyncio.create_task(notify_users(app))
     # Chạy bot
     await app.run_polling()
 
-import asyncio
-asyncio.run(main())
