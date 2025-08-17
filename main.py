@@ -233,6 +233,7 @@ async def notify_users(app):
 if __name__ == "__main__":
     app = ApplicationBuilder().token(TOKEN).build()
 
+    # Thêm command handlers
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("help", help_cmd))
     app.add_handler(CommandHandler("chatid", chatid))
@@ -245,12 +246,10 @@ if __name__ == "__main__":
 
     print("✅ Bot đang chạy...")
 
-    async def main():
-        # Tạo task vòng lặp API
-        asyncio.create_task(notify_users(app))
-        # Chạy bot
-        await app.run_polling()
+    # Chạy notify_users song song với bot
+    async def start_notify(_app):
+        asyncio.create_task(notify_users(_app))
 
-    import asyncio
-    asyncio.run(main())
+    # Chạy bot và chạy notify_users song song
+    app.run_polling(post_init=start_notify)
 
