@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: sunwin-bot
+    env: python
+    plan: starter
+    region: oregon
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: python main.py
+    envVars:
+      - key: TOKEN
+        value: "7318584635:AAGqNGVQP9tzUKFSHVZdqIDfpe99yg2tohE"
+      - key: ADMIN_ID
+        value: "7598401539"
+      - key: API_URL
+        value: "https://apibomaylanhat.onrender.com/predict"
+      - key: GROUP_CHAT_ID
+        value: "-1002860765460"
+    pythonVersion: "3.11"
