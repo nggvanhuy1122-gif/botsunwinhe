@@ -243,8 +243,14 @@ if __name__ == "__main__":
     app.add_handler(CommandHandler("stop", stop))
     app.add_handler(CommandHandler("taokey", taokey))
 
+ async def main():
     loop = asyncio.get_event_loop()
-    loop.create_task(notify_users(app))
+    loop.create_task(notify_users(app))  # vẫn giữ vòng lặp notify
 
     print("✅ Bot đang chạy...")
-    app.run_polling()
+    async with app:
+        await app.start()
+        await app.updater.start_polling()
+        await app.idle()  # giữ bot chạy liên tục
+
+asyncio.run(main())
